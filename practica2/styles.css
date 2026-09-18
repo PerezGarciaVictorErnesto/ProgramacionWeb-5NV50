@@ -58,7 +58,7 @@ form > label{
     border: 1px solid lightgray;
     padding: 5px;
     margin: 5px;
-    transition: box-shadow 0.5s ease-in-out, margin 0.5s ease-in-out;
+    transition: box-shadow 0.3s ease-in-out, margin 0.3s ease-in-out;
     background:transparent;
     outline:none;
     width: 80%;
