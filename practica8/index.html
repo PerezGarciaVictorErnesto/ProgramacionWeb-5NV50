@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Notificaciones</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="barra">
+    <nav>
+        <ul>
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Consultas</a></li>
+        <li><a href="#">Reportes</a></li>
+        <li><a href="#">Ayuda</a></li>
+        </ul>
+    </nav>
+
+    <div class="notif">
+        <button id="btnCampana" aria-label="Notificaciones" aria-expanded="false" aria-controls="lista">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 9a6 6 0 0 1 12 0c0 6 2.5 7.5 2.5 7.5h-17S6 15 6 9z"/>
+            <path d="M10 20a2 2 0 0 0 4 0"/>
+        </svg>
+        <span id="contador" hidden>0</span>
+        </button>
+        <ul id="lista" hidden>
+        <li class="vacio">Sin notificaciones</li>
+        </ul>
+    </div>
+    </header>
+
+    <main>
+    <button id="btnInicio">Inicio</button>
+    <p id="teclas">Teclas presionadas: 0</p>
+    </main>
+
+    <div id="aviso" role="status" aria-live="polite"></div>
+
+<script>
+    const CADA = 3;                       // cada cuántas teclas se genera una notificación
+    const btnCampana = document.getElementById("btnCampana");
+    const contador   = document.getElementById("contador");
+    const lista      = document.getElementById("lista");
+    const aviso      = document.getElementById("aviso");
+    const txtTeclas  = document.getElementById("teclas");
+    let teclas = 0;
+    let notificaciones = 0;
+    let temporizador;
+
+    // Registra una pulsación y genera la notificación en cada tercera
+    function registrarPulsacion() {
+        teclas++;
+        txtTeclas.textContent = "Teclas presionadas: " + teclas;
+        if (teclas % CADA === 0) nuevaNotificacion();
+    }
+
+    function nuevaNotificacion() {
+        notificaciones++;
+
+        // Contador sobre el ícono
+        contador.textContent = notificaciones;
+        contador.hidden = false;
+
+        // Elemento en el menú desplegable
+        if (notificaciones === 1) lista.innerHTML = "";
+        const li = document.createElement("li");
+        li.textContent = "Notificación " + notificaciones;
+        lista.appendChild(li);
+
+        // Aviso temporal con el número
+        aviso.textContent = "Notificación " + notificaciones;
+        aviso.classList.add("visible");
+        clearTimeout(temporizador);
+        temporizador = setTimeout(() => aviso.classList.remove("visible"), 1800);
+    }
+
+    // Teclas del teclado (se ignora la repetición al mantener presionada una tecla)
+    document.addEventListener("keydown", (e) => {
+        if (!e.repeat) registrarPulsacion();
+    });
+
+    // Clic con el mouse sobre el botón Inicio (detail > 0 evita contar dos veces
+    // cuando el botón se activa con Enter o Espacio, que ya cuentan como tecla)
+    document.getElementById("btnInicio").addEventListener("click", (e) => {
+        if (e.detail > 0) registrarPulsacion();
+    });
+
+    // Abrir y cerrar el menú de notificaciones
+    function alternarLista(mostrar) {
+        lista.hidden = !mostrar;
+        btnCampana.setAttribute("aria-expanded", String(mostrar));
+    }
+    btnCampana.addEventListener("click", (e) => {
+        e.stopPropagation();
+        alternarLista(lista.hidden);
+    });
+    document.addEventListener("click", (e) => {
+        if (!lista.contains(e.target)) alternarLista(false);
+    });
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") alternarLista(false);
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./Examen.css" />
+    <title>Pantalla 2</title>
+  </head>
+  <body>
+    <div class="Container-Form Form">
+      <!--Form para iniciar sesión-->
+        <label for="imgUrl">URL de la imagen</label>
+        <input
+          type="url"
+          id="imgUrl"
+          placeholder="https://ejemplo.com/imagen.jpg"
+        />
+        <div class="btn-row" style="margin-top: 10px">
+          <button
+            class="btn-primary"
+            style="flex: none; padding: 9px 18px"
+            onclick="cargarImagen()"
+          >
+            Cargar vista previa
+          </button>
+        </div>
+
+        <div class="preview-box" id="previewBox">
+          <div class="preview-placeholder">La vista previa aparecerá aquí</div>
+        </div>
+
+        <a href="./ExamenPantalla1.html">Pantalla Formulario</a>
+        <a href="./ExamenPantalla3.html">Pantalla Aviso privacidad</a>
+    </div>
+    <script>
+      function cargarImagen() {
+        const url = document.getElementById("imgUrl").value.trim();
+        const box = document.getElementById("previewBox");
+        if (!url) {
+          box.innerHTML =
+            '<div class="preview-placeholder">Ingrese una URL válida</div>';
+          return;
+        }
+        box.innerHTML = '<div class="preview-placeholder">Cargando…</div>';
+        const img = new Image();
+        img.onload = () => {
+          box.innerHTML = "";
+          box.appendChild(img);
+        };
+        img.onerror = () => {
+          box.innerHTML =
+            '<div class="preview-placeholder">No se pudo cargar la imagen desde esa URL</div>';
+        };
+        img.src = url;
+      }
+    </script>
+  </body>
+</html>

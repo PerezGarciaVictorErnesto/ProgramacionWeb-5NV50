@@ -1,0 +1,60 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: system-ui, sans-serif;
+    margin:0;
+    background: #f5f5f5;
+}
+
+.menu{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    background: #1f3a5f;
+}
+
+.menu > li{
+    position: relative;
+}
+
+.menu a{
+    display: block;
+    padding: 14px 20px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.menu > li:hover > a,
+.menu > li:focus-within > a{
+    background: #2e5a94;
+    margin: 0px 20px;
+}
+
+.submenu{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 180px;
+    background: #2e5a94;
+    display: none;
+    z-index: 10;
+}
+
+.submenu a {
+    padding: 10px 20px;
+}
+.submenu a:hover{
+    background: #3d73b8;
+}
+
+.menu > li:hover > .submenu,
+.menu > li:focus-within > .submenu{
+    display: block;
+    margin: 0px 20px;
+}

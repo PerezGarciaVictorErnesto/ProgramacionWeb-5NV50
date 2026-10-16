@@ -1,0 +1,171 @@
+* {
+  padding: 0;
+  margin: 0;
+  /*border: 0;*/
+}
+
+body {
+  background-color: lightblue;
+}
+
+.Container-Form {
+  width: 60%;
+  height: 60%;
+  max-width: 400px;
+  border-radius: 8px;
+  background-color: white;
+  padding: 2.5%;
+  justify-self: center;
+  margin: 20%;
+  transition: 0.2s ease-in-out;
+}
+
+.Container-Form:focus-within {
+  box-shadow: 5px 10px 10px grey;
+}
+
+@media screen and (max-width: 500px) {
+  .Container-Form {
+    width: 90%;
+    height: 90%;
+    margin: 5%;
+  }
+}
+
+.Form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form > label {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.Form-Title {
+  text-align: center;
+  padding: 10px;
+}
+
+.Form-Input-Text {
+  border-radius: 8px;
+  border: 1px solid lightgray;
+  padding: 5px;
+  margin: 5px;
+  transition: 0.2s ease-in-out;
+  background: transparent;
+  outline: none;
+  width: 80%;
+  padding: 10px;
+}
+
+.Form-Input-Text:focus {
+  box-shadow: 3px 5px 5px grey;
+  margin: 10px;
+  border: 3px outset lightblue;
+}
+
+.Form-Submit {
+  border-radius: 8px;
+  border: 1px solid lightblue;
+  padding: 5px;
+  margin: 5px;
+  transition: 0.2s ease-in-out;
+  background-color: lightblue;
+  outline: none;
+  width: 80%;
+  padding: 10px;
+  font-size: 0.875rem;
+}
+
+.Form-Submit:hover {
+  margin: 10px;
+  background-color: blue;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+}
+
+.Form-Submit:active {
+  background-color: darkblue;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.Form-Secondary-Text {
+  padding: 10px;
+
+  a {
+    /*text-decoration: underline;*/
+    color: blue;
+  }
+  a:hover {
+    text-decoration: none;
+    color: red;
+  }
+}
+
+.btn-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 26px;
+}
+button {
+  flex: 1;
+  padding: 11px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.preview-box img {
+  max-width: 100%;
+  max-height: 260px;
+  object-fit: contain;
+}
+.preview-placeholder {
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 20px;
+}
+
+.btn-finalizar {
+  display: none;
+}
+
+.checkbox-aviso:checked ~ label .btn-finalizar {
+  display: inline-block;
+}
+.btn-finalizar {
+  display: none;
+}
+
+form:has(.checkbox-aviso:checked) .btn-finalizar {
+  display: inline-block;
+}
+
+.privacy-text {
+  max-height: 200px;
+  overflow-y: auto;
+  text-align: left;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.label-0 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}

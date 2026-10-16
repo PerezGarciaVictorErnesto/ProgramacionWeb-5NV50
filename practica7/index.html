@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Practica 7</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <main class="panel">
+    <label>
+        <input type="checkbox" id="chkInicio">
+        Inicio de prueba
+    </label>
+
+    <button id="btnAcepto" disabled>Acepto</button>
+    <p id="estado" aria-live="polite"></p>
+    </main>
+
+    <dialog id="aviso" aria-labelledby="leyenda">
+    
+        <svg viewBox="0 0 120 110" role="img" aria-label="Señal de precaución">
+        <path d="M60 8 L112 100 H8 Z" fill="#f2a900" stroke="#1b2430" stroke-width="6" stroke-linejoin="round"/>
+        <rect x="55" y="38" width="10" height="34" rx="5" fill="#1b2430"/>
+        <circle cx="60" cy="85" r="6" fill="#1b2430"/>
+    </svg>
+    <p id="leyenda">Cuidado, no presiones tan fuerte</p>
+    <button id="btnAceptar">Aceptar</button>
+    </dialog>
+
+<script>
+  // Gama de blanco a azul oscuro (5 tonos) y color de texto legible para cada uno
+  const tonos = [
+    { fondo: "#ffffff", texto: "#0a2a66" },
+    { fondo: "#b3d1f2", texto: "#0a2a66" },
+    { fondo: "#6aa5e0", texto: "#0a2a66" },
+    { fondo: "#2f6fbf", texto: "#ffffff" },
+    { fondo: "#0a2a66", texto: "#ffffff" }
+  ];
+
+  const chk    = document.getElementById("chkInicio");
+  const btn    = document.getElementById("btnAcepto");
+  const estado = document.getElementById("estado");
+  const aviso  = document.getElementById("aviso");
+  let veces = 0; // cuántas veces se ha seleccionado la casilla
+
+  chk.addEventListener("change", () => {
+    if (chk.checked) {
+      const i = veces % tonos.length;       // vuelve al primer tono después del quinto
+      btn.style.setProperty("--tono", tonos[i].fondo);
+      btn.style.setProperty("--texto", tonos[i].texto);
+      btn.disabled = false;
+      //estado.textContent = "Tono " + (i + 1) + " de " + tonos.length;
+      veces++;
+    } else {
+      btn.disabled = true;
+      estado.textContent = "";
+    }
+  });
+
+  btn.addEventListener("click", () => aviso.showModal());
+  document.getElementById("btnAceptar").addEventListener("click", () => aviso.close());
+</script>
+
+</body>
+</html>

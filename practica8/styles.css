@@ -1,0 +1,146 @@
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: system-ui, sans-serif;
+    background: #e9edf2;
+    color: #1b2430;
+  }
+
+  /* Barra superior tipo menú */
+  .barra {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #1f3a5f;
+    padding: 0 clamp(10px, 3vw, 24px);
+    position: relative;
+  }
+  .barra ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .barra ul a {
+    display: block;
+    padding: 14px clamp(10px, 2vw, 20px);
+    color: #fff;
+    text-decoration: none;
+  }
+  .barra ul a:hover { background: #2e5a94; }
+
+  /* Campana y contador */
+  .notif { position: relative; }
+
+  #btnCampana {
+    position: relative;
+    background: none;
+    border: none;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 8px;
+    line-height: 0;
+  }
+  #btnCampana:hover { background: #2e5a94; }
+  #btnCampana svg {
+    width: 28px;
+    height: 28px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  #contador {
+    position: absolute;
+    top: 2px;
+    right: 0;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    border-radius: 10px;
+    background: #e53935;
+    color: #fff;
+    font-size: .75rem;
+    font-weight: 700;
+    line-height: 20px;
+    text-align: center;
+  }
+
+  /* Menú desplegable de notificaciones */
+  #lista {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 6px);
+    width: min(86vw, 280px);
+    max-height: 60vh;
+    overflow-y: auto;
+    margin: 0;
+    padding: 6px 0;
+    list-style: none;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, .3);
+    z-index: 20;
+  }
+  #lista[hidden] { display: none; }
+  #lista li { padding: 10px 16px; border-bottom: 1px solid #e3e7ec; }
+  #lista li:last-child { border-bottom: none; }
+  #lista li.vacio { color: #6b7580; }
+
+  /* Contenido principal */
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    padding: clamp(40px, 12vh, 120px) 16px 16px;
+  }
+
+  /* Botón Inicio con efecto de presionado (sumido) */
+  #btnInicio {
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 14px 48px;
+    border: none;
+    border-radius: 10px;
+    background: #2e5a94;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 6px 0 #1b3a63, 0 10px 16px rgba(0, 0, 0, .25);
+    transition: transform .08s ease, box-shadow .08s ease;
+  }
+  #btnInicio:active {
+    transform: translateY(5px);
+    box-shadow: 0 1px 0 #1b3a63, inset 0 3px 8px rgba(0, 0, 0, .4);
+  }
+  #btnInicio:focus-visible,
+  #btnCampana:focus-visible { outline: 3px solid #f2a900; outline-offset: 3px; }
+
+  #teclas { margin: 0; color: #46515e; }
+
+  /* Aviso temporal con el número de la notificación */
+  #aviso {
+    position: fixed;
+    left: 50%;
+    bottom: 28px;
+    transform: translate(-50%, 20px);
+    background: #1b2430;
+    color: #fff;
+    padding: 12px 22px;
+    border-radius: 8px;
+    font-weight: 600;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s ease, transform .25s ease;
+  }
+  #aviso.visible { opacity: 1; transform: translate(-50%, 0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    #btnInicio, #aviso { transition: none; }
+  }
